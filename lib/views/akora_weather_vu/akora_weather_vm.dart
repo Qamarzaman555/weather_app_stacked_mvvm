@@ -4,8 +4,11 @@ import 'package:stacked/stacked.dart';
 import 'package:http/http.dart' as http;
 import '../../model/data_model.dart';
 import '../../res/app_url/app_url.dart';
+import '../../res/images/image_assets.dart';
+import '../../utils/util.dart';
 
 class AkoraWeatherScreenVM extends BaseViewModel {
+  final double? extendedHeight = 140;
   List<DataModel> dataList = [];
   List<CurrentConditions> currentConditionsList = [];
   List<dynamic> alertsList = [];
@@ -46,5 +49,14 @@ class AkoraWeatherScreenVM extends BaseViewModel {
       throw Exception('Failed to load data');
     }
     setBusy(false);
+  }
+
+  String getImage(int index) {
+    return Utils.imageMap[
+                dataList.first.days![0].hours![index].conditions.toString()] ==
+            null
+        ? ImageAssets.nightStarRain
+        : Utils.imageMap[
+            dataList.first.days![0].hours![index].conditions.toString()]!;
   }
 }

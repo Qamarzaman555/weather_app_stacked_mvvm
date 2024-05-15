@@ -57,4 +57,12 @@ class Utils {
     DateTime now = DateTime.now();
     return dateFormat.format(dateTime) == dateFormat.format(now);
   }
+
+  static String extractHourFromEpoch(int epoch) {
+    // Convert epoch to DateTime object
+    DateTime dtObject = DateTime.fromMillisecondsSinceEpoch(epoch * 1000);
+    // Extract hour in 12-hour format
+    String hour = DateFormat('h:mm a').format(dtObject);
+    return hour;
+  }
 }

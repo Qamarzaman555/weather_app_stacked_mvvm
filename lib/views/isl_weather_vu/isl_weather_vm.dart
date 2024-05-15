@@ -1,14 +1,20 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:stacked/stacked.dart';
-import '../../model/data_model.dart';
+import '../../models/data_model.dart';
+import '../../models/day_cond_model.dart';
 import '../../res/app_url/app_url.dart';
+import '../../res/images/image_assets.dart';
+import '../../utils/util.dart';
 
 class ISLWeatherScreenVM extends BaseViewModel {
+  final double? extendedHeight = 140;
   List<DataModel> dataList = [];
   List<CurrentConditions> currentConditionsList = [];
   List<dynamic> alertsList = [];
   List<Stations> stationsList = [];
+  List<WeatherCondition> weather = [];
 
   ISLWeatherScreenVM() {
     getData();
@@ -44,6 +50,47 @@ class ISLWeatherScreenVM extends BaseViewModel {
     } else {
       throw Exception('Failed to load data');
     }
+    weather = [
+      WeatherCondition(
+        condName: 'Feels like',
+        icon: Icons.thermostat,
+        value: dataList[0].days![0].feelslike!.toInt(),
+      ),
+      WeatherCondition(
+        condName: 'Wind',
+        icon: Icons.air,
+        value: dataList[0].days![0].windspeed!.toInt(),
+      ),
+      WeatherCondition(
+        condName: 'Humadity',
+        icon: Icons.water_drop_outlined,
+        value: dataList[0].days![0].humidity!.toInt(),
+      ),
+      WeatherCondition(
+        condName: 'Dew',
+        icon: Icons.water_drop,
+        value: dataList[0].days![0].dew!.toInt(),
+      ),
+      WeatherCondition(
+        condName: 'UV',
+        icon: Icons.wb_sunny_outlined,
+        value: dataList[0].days![0].uvindex!.toInt(),
+      ),
+      WeatherCondition(
+        condName: 'Air pressure',
+        icon: Icons.wb_iridescent,
+        value: dataList[0].days![0].pressure!.toInt(),
+      ),
+    ];
     setBusy(false);
+  }
+
+  String getImage(int index) {
+    return Utils.imageMap[
+                dataList.first.days![0].hours![index].conditions.toString()] ==
+            null
+        ? ImageAssets.nightStarRain
+        : Utils.imageMap[
+            dataList.first.days![0].hours![index].conditions.toString()]!;
   }
 }

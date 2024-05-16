@@ -1,4 +1,23 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+extension ResponsiveExtension on num {
+  // Responsive dimensions based on screen height and width
+  double responsiveHeight(BuildContext context) =>
+      (toDouble() / 100) * MediaQuery.of(context).size.height;
+
+  double responsiveWidth(BuildContext context) =>
+      (toDouble() / 100) * MediaQuery.of(context).size.width;
+
+  // Spacing widgets with responsive dimensions
+  Widget spaceY(BuildContext context) => SizedBox(
+        height: responsiveHeight(context),
+      );
+
+  Widget spaceX(BuildContext context) => SizedBox(
+        width: responsiveWidth(context),
+      );
+}
 
 class Utils {
   static Map<dynamic, String> imageMap = {

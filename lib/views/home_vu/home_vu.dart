@@ -9,20 +9,35 @@ import '../now_weather_vu/now_weather_vu.dart';
 import 'home_vm.dart';
 
 class HomeScreenVU extends StackedView<HomeScreenVM> {
-  final List<DataModel> dataList;
-  final List<WeatherCondition> weather;
+  final List<DataModel> akoraWeatherList, islWeatherList, nowWeatherList;
+  final List<WeatherCondition> akoraWeatherCond, islWeatherCond, nowWeatherCond;
   const HomeScreenVU(
-      {super.key, required this.dataList, required this.weather});
+      {super.key,
+      required this.akoraWeatherList,
+      required this.akoraWeatherCond,
+      required this.islWeatherList,
+      required this.islWeatherCond,
+      required this.nowWeatherList,
+      required this.nowWeatherCond});
 
   @override
   Widget builder(BuildContext context, HomeScreenVM viewModel, Widget? child) {
     return Scaffold(
       body: PageView(
         controller: PageController(initialPage: 0),
-        children: const [
-          AkoraWeatherScreenVU(),
-          ISLWeatherScreenVU(),
-          NowWeatherScreenVU(),
+        children: [
+          AkoraWeatherScreenVU(
+            akoraWeatherList: akoraWeatherList,
+            akoraWeatherCond: akoraWeatherCond,
+          ),
+          ISLWeatherScreenVU(
+            islWeatherList: islWeatherList,
+            islWeatherCond: islWeatherCond,
+          ),
+          NowWeatherScreenVU(
+            nowWeatherList: nowWeatherList,
+            nowWeatherCond: nowWeatherCond,
+          ),
         ],
       ),
     );

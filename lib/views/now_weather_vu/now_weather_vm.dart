@@ -10,14 +10,10 @@ import '../../res/images/image_assets.dart';
 import '../../utils/util.dart';
 
 class NowWeatherScreenVM extends BaseViewModel {
-  final double? extendedHeight = 140;
   List<DataModel> dataList = [];
-  List<CurrentConditions> currentConditionsList = [];
-  List<dynamic> alertsList = [];
-  List<Stations> stationsList = [];
   List<WeatherCondition> weather = [];
 
-  ISLWeatherScreenVM() {
+  NowWeatherScreenVM() {
     getData();
   }
 
@@ -31,22 +27,6 @@ class NowWeatherScreenVM extends BaseViewModel {
       // Extract DataModel
       final dataModel = DataModel.fromJson(body);
       dataList.add(dataModel);
-
-      // Extract CurrentConditions
-      if (dataModel.days != null && dataModel.days!.isNotEmpty) {
-        currentConditionsList.addAll(dataModel.days!.first.hours ?? []);
-      }
-
-      // Extract Alerts
-      if (dataModel.alerts != null) {
-        alertsList.addAll(dataModel.alerts!);
-      }
-
-      // Extract Stations
-      if (dataModel.stations != null) {
-        stationsList.add(dataModel.stations!);
-      }
-
       notifyListeners();
     } else {
       throw Exception('Failed to load data');
@@ -86,7 +66,7 @@ class NowWeatherScreenVM extends BaseViewModel {
     setBusy(false);
   }
 
-  String getImage(int index) {
+  String getImage(int index, dataList) {
     return Utils.imageMap[
                 dataList.first.days![0].hours![index].conditions.toString()] ==
             null

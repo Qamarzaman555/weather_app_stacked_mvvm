@@ -2,8 +2,8 @@ import 'package:stacked/stacked.dart';
 import '../../res/images/image_assets.dart';
 import '../../utils/util.dart';
 
-class AkoraWeatherScreenVM extends BaseViewModel {
-  AkoraWeatherScreenVM();
+class WeatherScreenVM extends BaseViewModel {
+  WeatherScreenVM();
 
   String getImage(int index, dataList) {
     return Utils.imageMap[

@@ -16,11 +16,11 @@ class SplashScreenVM extends BaseViewModel {
   List<WeatherCondition> islWeatherCond = [];
   List<WeatherCondition> nowWeatherCond = [];
 
-  SplashScreenVM(BuildContext context) {
+  SplashScreenVM(context) {
     _initialize(context);
   }
 
-  Future<void> _initialize(BuildContext context) async {
+  Future<void> _initialize(context) async {
     setBusy(true);
     await getAkoraWeather();
     await getIslWeather();

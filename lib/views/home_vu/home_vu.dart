@@ -4,8 +4,6 @@ import 'package:weather/models/data_model.dart';
 import 'package:weather/models/day_cond_model.dart';
 
 import '../akora_weather_vu/akora_weather_vu.dart';
-import '../isl_weather_vu/isl_weather_vu.dart';
-import '../now_weather_vu/now_weather_vu.dart';
 import 'home_vm.dart';
 
 class HomeScreenVU extends StackedView<HomeScreenVM> {
@@ -26,17 +24,17 @@ class HomeScreenVU extends StackedView<HomeScreenVM> {
       body: PageView(
         controller: PageController(initialPage: 0),
         children: [
-          AkoraWeatherScreenVU(
-            akoraWeatherList: akoraWeatherList,
-            akoraWeatherCond: akoraWeatherCond,
+          WeatherScreenVU(
+            weatherList: akoraWeatherList,
+            weatherCond: akoraWeatherCond,
           ),
-          ISLWeatherScreenVU(
-            islWeatherList: islWeatherList,
-            islWeatherCond: islWeatherCond,
+          WeatherScreenVU(
+            weatherList: islWeatherList,
+            weatherCond: islWeatherCond,
           ),
-          NowWeatherScreenVU(
-            nowWeatherList: nowWeatherList,
-            nowWeatherCond: nowWeatherCond,
+          WeatherScreenVU(
+            weatherList: nowWeatherList,
+            weatherCond: nowWeatherCond,
           ),
         ],
       ),

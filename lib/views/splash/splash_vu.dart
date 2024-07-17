@@ -11,7 +11,6 @@ class SplashScreenVU extends StackedView<SplashScreenVM> {
   Widget builder(
       BuildContext context, SplashScreenVM viewModel, Widget? child) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[100],
       body: Center(
         child: Image.asset(
           ImageAssets.nightStarRain,
@@ -23,5 +22,6 @@ class SplashScreenVU extends StackedView<SplashScreenVM> {
   }
 
   @override
-  SplashScreenVM viewModelBuilder(BuildContext context) => SplashScreenVM(context);
+  SplashScreenVM viewModelBuilder(BuildContext context) =>
+      SplashScreenVM(context);
 }
